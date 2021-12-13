@@ -40,6 +40,34 @@ class AppRouter {
               : const LandingScreen(),
         );
 
+      case RouteName.homeScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.homeScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const HomeScreen(),
+                )
+              : const HomeScreen(),
+        );
+
+      case RouteName.cartScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.cartScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const CartScreen(),
+                )
+              : const CartScreen(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

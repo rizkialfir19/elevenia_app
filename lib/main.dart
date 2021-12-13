@@ -25,7 +25,6 @@ void main() {
     () => runApp(
       App(
         // apiClient: _apiClient,
-        // firebaseClient: _firebaseClient,
         localStorageClient: _localStorageClient,
         // authenticationRepository: _authenticationRepository,
       ),
