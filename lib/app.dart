@@ -7,12 +7,14 @@ import 'core/core.dart';
 
 class App extends StatelessWidget {
   final BaseLocalStorageClient localStorageClient;
-  // final BaseHomeRepository homeRepository;
+  final BaseApiClient apiClient;
+  final BaseProductRepository productRepository;
 
   const App({
     Key? key,
     required this.localStorageClient,
-    // required this.homeRepository,
+    required this.apiClient,
+    required this.productRepository,
   }) : super(key: key);
 
   @override
@@ -22,9 +24,12 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => localStorageClient,
         ),
-        // RepositoryProvider(
-        //   create: (context) => homeRepository,
-        // ),
+        RepositoryProvider(
+          create: (context) => apiClient,
+        ),
+        RepositoryProvider(
+          create: (context) => productRepository,
+        ),
       ],
       child: MultiBlocProvider(
         providers: [

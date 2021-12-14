@@ -5,4 +5,7 @@ class RouteName {
   // Tab
   static const String homeScreen = 'homeScreen';
   static const String cartScreen = 'cartScreen';
+
+  // Others
+  static const String detailProductScreen = 'detailProductScreen';
 }

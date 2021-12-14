@@ -1,3 +1,4 @@
+import 'package:elevenia_app/ui/screens/detail_product/detail_product_screen.dart';
 import 'package:elevenia_app/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,6 +67,20 @@ class AppRouter {
                   child: const CartScreen(),
                 )
               : const CartScreen(),
+        );
+
+      case RouteName.detailProductScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.detailProductScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: DetailProductScreen(),
+                )
+              : DetailProductScreen(),
         );
 
       default:
