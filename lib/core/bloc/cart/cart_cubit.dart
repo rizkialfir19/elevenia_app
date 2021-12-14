@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CartCubit extends Cubit<BaseState> {
   final BaseLocalStorageClient localStorageClient;
 
-  CartCubit({required this.localStorageClient}) : super(InitializedState());
+  CartCubit({
+    required this.localStorageClient,
+  }) : super(InitializedState());
 
   Future<void> addCartData({
     required ProductList data,
@@ -50,5 +52,48 @@ class CartCubit extends Cubit<BaseState> {
 
       return;
     }
+  }
+
+  /// Get All Cart List Product
+  Future<void> getCartData() async {
+    emit(LoadingState());
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    List<ProductList> _results = [];
+    String? _rawResults;
+
+    /// Get and Parse from sharedPref
+    try {
+      _rawResults = await localStorageClient.getByKey(
+        SharedPrefKey.cartData,
+        SharedPrefType.string,
+      );
+
+      if (_rawResults != null) {
+        _results.add(ProductList.fromJson(jsonDecode(_rawResults)));
+      }
+
+      if (_results.isEmpty) {
+        emit(EmptyState());
+        return;
+      }
+    } catch (e, s) {
+      debugPrint("===> Error $e");
+      debugPrint("===> Error $s");
+      emit(
+        ErrorState(
+          error: '$this - Get Cart List Product Data] - Error : $e',
+          timestamp: DateTime.now(),
+        ),
+      );
+      return;
+    }
+
+    /// All validate pass
+    emit(LoadedState(
+      data: _results,
+      timestamp: DateTime.now(),
+    ));
   }
 }

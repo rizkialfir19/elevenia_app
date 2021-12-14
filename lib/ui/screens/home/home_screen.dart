@@ -37,6 +37,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
 
@@ -64,6 +65,12 @@ class HomeView extends StatelessWidget {
               child: CircularProgressIndicator(
                 color: Palette.eleveniaPrimaryRed,
               ),
+            );
+          }
+
+          if (state is EmptyState) {
+            return const Center(
+              child: Text("Data tidak ditemukan."),
             );
           }
 
