@@ -69,14 +69,46 @@ class HomeView extends StatelessWidget {
           }
 
           if (state is EmptyState) {
-            return const Center(
-              child: Text("Data tidak ditemukan."),
+            return Center(
+              child: Column(
+                children: [
+                  const Text("Data tidak ditemukan."),
+                  GestureDetector(
+                    onTap: () => context.read<ProductDataCubit>()
+                      ..getData(
+                        page: "1",
+                      ),
+                    child: Text(
+                      "Coba Lagi",
+                      style: FontHelper.h6Bold(
+                        color: Palette.eleveniaPrimaryRed,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           }
 
           if (state is ErrorState) {
-            return const Center(
-              child: Text("Terjadi kesalahan. Silahkan coba lagi."),
+            return Center(
+              child: Column(
+                children: [
+                  const Text("Terjadi kesalahan. Silahkan coba lagi."),
+                  GestureDetector(
+                    onTap: () => context.read<ProductDataCubit>()
+                      ..getData(
+                        page: "1",
+                      ),
+                    child: Text(
+                      "Coba Lagi",
+                      style: FontHelper.h6Bold(
+                        color: Palette.eleveniaPrimaryRed,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           }
 
